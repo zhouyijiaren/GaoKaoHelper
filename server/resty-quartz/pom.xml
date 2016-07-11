@@ -1,0 +1,57 @@
+<project xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://maven.apache.org/POM/4.0.0"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
+  <parent>
+    <artifactId>resty</artifactId>
+    <groupId>cn.dreampie</groupId>
+    <version>1.2.0-SNAPSHOT</version>
+  </parent>
+  <modelVersion>4.0.0</modelVersion>
+  <artifactId>resty-quartz</artifactId>
+  <version>${parent.version}</version>
+  <packaging>jar</packaging>
+  <name>resty-quartz</name>
+  <url>https://github.com/Dreampie/${parent.name}</url>
+  <description>Resty quartz</description>
+
+  <properties>
+    <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+    <resty.version>${parent.version}</resty.version>
+    <quartz.version>2.2.1</quartz.version>
+  </properties>
+
+  <dependencies>
+
+    <dependency>
+      <groupId>org.quartz-scheduler</groupId>
+      <artifactId>quartz</artifactId>
+      <version>${quartz.version}</version>
+      <exclusions>
+        <exclusion>
+          <artifactId>slf4j-api</artifactId>
+          <groupId>org.slf4j</groupId>
+        </exclusion>
+        <exclusion>
+          <artifactId>c3p0</artifactId>
+          <groupId>c3p0</groupId>
+        </exclusion>
+      </exclusions>
+    </dependency>
+
+    <dependency>
+      <groupId>cn.dreampie</groupId>
+      <artifactId>resty-common</artifactId>
+      <version>${resty.version}</version>
+    </dependency>
+
+    <dependency>
+      <groupId>cn.dreampie</groupId>
+      <artifactId>resty-orm</artifactId>
+      <version>${resty.version}</version>
+      <scope>provided</scope>
+    </dependency>
+
+  </dependencies>
+  <build>
+    <finalName>${project.name}-v${project.version}</finalName>
+  </build>
+</project>

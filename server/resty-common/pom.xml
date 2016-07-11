@@ -1,0 +1,66 @@
+<project xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://maven.apache.org/POM/4.0.0"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+  <parent>
+    <artifactId>resty</artifactId>
+    <groupId>cn.dreampie</groupId>
+    <version>1.2.0-SNAPSHOT</version>
+  </parent>
+  <modelVersion>4.0.0</modelVersion>
+
+  <artifactId>resty-common</artifactId>
+  <packaging>jar</packaging>
+  <version>${parent.version}</version>
+  <name>resty-common</name>
+  <url>https://github.com/Dreampie/${parent.name}</url>
+  <description>Resty common tools</description>
+
+  <properties>
+    <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+    <resty.version>${parent.version}</resty.version>
+    <fastjson.version>1.2.5</fastjson.version>
+    <spring-context.version>4.2.1.RELEASE</spring-context.version>
+    <servlet.version>3.1.0</servlet.version>
+  </properties>
+
+  <dependencies>
+
+    <dependency>
+      <groupId>cn.dreampie</groupId>
+      <artifactId>resty-log</artifactId>
+      <version>${resty.version}</version>
+    </dependency>
+
+    <dependency>
+      <groupId>com.alibaba</groupId>
+      <artifactId>fastjson</artifactId>
+      <version>${fastjson.version}</version>
+      <scope>provided</scope>
+    </dependency>
+
+    <dependency>
+      <groupId>org.springframework</groupId>
+      <artifactId>spring-context</artifactId>
+      <version>${spring-context.version}</version>
+      <scope>provided</scope>
+    </dependency>
+
+    <dependency>
+      <groupId>javax.servlet</groupId>
+      <artifactId>javax.servlet-api</artifactId>
+      <version>${servlet.version}</version>
+      <scope>provided</scope>
+    </dependency>
+
+    <!--jdk1.6   不支持servlet3.0-->
+    <!--<dependency>-->
+    <!--<groupId>javax.servlet</groupId>-->
+    <!--<artifactId>servlet-api</artifactId>-->
+    <!--<version>2.5</version>-->
+    <!--<scope>provided</scope>-->
+    <!--</dependency>-->
+  </dependencies>
+
+  <build>
+    <finalName>${project.name}-v${project.version}</finalName>
+  </build>
+</project>
