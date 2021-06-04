@@ -45,5 +45,5 @@ jobs:
         type: markdown
         content: |
           # 💤🤷‍♀️ failure 🙅‍♂️💣
-          > Maven Build of [# ${{ env.PR_TITLE }}](${{ env.PR_URL }}) by ${{ env.PR_USER }} failure
+          > Maven Build of fail
           > (⋟﹏⋞)   from github action message
