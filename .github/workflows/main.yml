@@ -31,7 +31,7 @@ jobs:
       if: ${{ success() }}
       uses: fifsky/dingtalk-action@master
       with:
-        url: https://oapi.dingtalk.com/robot/send?access_token=56ba2d0cc9211ae7cf36e94db961b5cea6fc288743781af7be86f5c7065cebf1
+        url: https://oapi.dingtalk.com/robot/send?access_token=20499910a4567a08b9bd089bb9c29ec62885f097337fbc6ce4b3558d94a5e02e
         type: markdown
         content: |
           # 💯👨‍💻 Success 🎉🎉🎉
@@ -41,7 +41,7 @@ jobs:
       if: ${{ failure() }}
       uses: fifsky/dingtalk-action@master
       with:
-        url: https://oapi.dingtalk.com/robot/send?access_token=56ba2d0cc9211ae7cf36e94db961b5cea6fc288743781af7be86f5c7065cebf1
+        url: https://oapi.dingtalk.com/robot/send?access_token=20499910a4567a08b9bd089bb9c29ec62885f097337fbc6ce4b3558d94a5e02e
         type: markdown
         content: |
           # 💤🤷‍♀️ failure 🙅‍♂️💣
