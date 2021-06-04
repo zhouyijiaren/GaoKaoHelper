@@ -1,30 +1,49 @@
-# This is a basic workflow to help you get started with Actions
+name: get pull request info for Dingding
 
-name: CI
-
-# Controls when the action will run. 
 on:
-  # Triggers the workflow on push or pull request events but only for the master branch
   push:
-    branches: [ master ]
   pull_request:
-    branches: [ master ]
 
-  # Allows you to run this workflow manually from the Actions tab
-  workflow_dispatch:
-
-# A workflow run is made up of one or more jobs that can run sequentially or in parallel
 jobs:
-  # This workflow contains a single job called "build"
-  build:
-    # The type of runner that the job will run on
+  spring-boot:
     runs-on: ubuntu-latest
-
-    # Steps represent a sequence of tasks that will be executed as part of the job
+    timeout-minutes: 10
     steps:
-      # Checks-out your repository under $GITHUB_WORKSPACE, so your job can access it
-      - uses: actions/checkout@v2
-
-      # Runs a single command using the runners shell
-      - name: Run a one-line script
-        run: "git diff HEAD^ HEAD"
+    - name: checkout
+      uses: actions/checkout@v2
+      
+    # 此处省略具体的业务代码    
+   
+    # 获取PR信息并将其添加到环境变量
+    - name: set PR_INFO 
+      run: |
+        echo PR_NUMBER=$(echo $GITHUB_REF | awk 'BEGIN { FS = "/" } ; { print $3 }') >> $GITHUB_ENV
+        echo PR_TITLE=$(jq --raw-output .pull_request.title "$GITHUB_EVENT_PATH") >> $GITHUB_ENV
+        echo PR_URL=$(jq --raw-output .pull_request.html_url "$GITHUB_EVENT_PATH") >> $GITHUB_ENV
+        echo PR_USER=$(jq --raw-output .pull_request.user.login "$GITHUB_EVENT_PATH") >> $GITHUB_ENV
+    
+    # 打印环境变量
+    - name: print env
+      run: printenv
+     
+    # 发送钉钉消息
+    - name: build success
+      if: ${{ success() }}
+      uses: fifsky/dingtalk-action@master
+      with:
+        url: https://oapi.dingtalk.com/robot/send?access_token=56ba2d0cc9211ae7cf36e94db961b5cea6fc288743781af7be86f5c7065cebf1
+        type: markdown
+        content: |
+          # 💯👨‍💻 Success 🎉🎉🎉
+          > Maven Build of [# ${{ env.PR_TITLE }}](${{ env.PR_URL }}) by ${{ env.PR_USER }} success
+          > ^_^ from github action message 
+    - name: maven build failure
+      if: ${{ failure() }}
+      uses: fifsky/dingtalk-action@master
+      with:
+        url: https://oapi.dingtalk.com/robot/send?access_token=56ba2d0cc9211ae7cf36e94db961b5cea6fc288743781af7be86f5c7065cebf1
+        type: markdown
+        content: |
+          # 💤🤷‍♀️ failure 🙅‍♂️💣
+          > Maven Build of [# ${{ env.PR_TITLE }}](${{ env.PR_URL }}) by ${{ env.PR_USER }} failure
+          > (⋟﹏⋞)   from github action message
