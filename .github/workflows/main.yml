@@ -21,8 +21,10 @@ jobs:
         echo PR_TITLE=$(jq --raw-output .pull_request.title "$GITHUB_EVENT_PATH") >> $GITHUB_ENV
         echo PR_URL=$(jq --raw-output .pull_request.html_url "$GITHUB_EVENT_PATH") >> $GITHUB_ENV
         echo PR_USER=$(jq --raw-output .pull_request.user.login "$GITHUB_EVENT_PATH") >> $GITHUB_ENV
+        git log -p -1 .github/workflows/main.yml > temp
+        cat temp
         echo 'DIFFLOG<<EOF' >> $GITHUB_ENV
-        git log -p -1 .github/workflows/main.yml >> $GITHUB_ENV
+        cat temp > $GITHUB_ENV
         echo 'EOF' >> $GITHUB_ENV
         
     # 打印环境变量
