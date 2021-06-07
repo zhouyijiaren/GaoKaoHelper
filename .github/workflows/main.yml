@@ -21,11 +21,10 @@ jobs:
         echo PR_TITLE=$(jq --raw-output .pull_request.title "$GITHUB_EVENT_PATH") >> $GITHUB_ENV
         echo PR_URL=$(jq --raw-output .pull_request.html_url "$GITHUB_EVENT_PATH") >> $GITHUB_ENV
         echo PR_USER=$(jq --raw-output .pull_request.user.login "$GITHUB_EVENT_PATH") >> $GITHUB_ENV
-        ID="$(jq '.comment.id' $GITHUB_EVENT_PATH)"
-        echo $(ID)
+        echo "$(jq '.comment.id' $GITHUB_EVENT_PATH)"
         git checkout master
         git pull
-        git show $(ID) server/pom.xml > temp
+        git show $(jq '.comment.id' $GITHUB_EVENT_PATH) server/pom.xml > temp
         echo 'DIFFLOG<<EOF' >> $GITHUB_ENV
         cat temp >> $GITHUB_ENV
         echo 'EOF' >> $GITHUB_ENV
