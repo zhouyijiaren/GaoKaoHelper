@@ -38,7 +38,7 @@ jobs:
         type: markdown
         content: |
           # 💯👨‍💻 Success 🎉🎉🎉
-          > ${{ DIFFLOG }}
+          > ${{ env.DIFFLOG }}
           > ^_^ from github action message 
     - name: maven build failure
       if: ${{ failure() }}
