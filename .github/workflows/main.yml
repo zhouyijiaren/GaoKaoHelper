@@ -21,7 +21,7 @@ jobs:
         echo PR_TITLE=$(jq --raw-output .pull_request.title "$GITHUB_EVENT_PATH") >> $GITHUB_ENV
         echo PR_URL=$(jq --raw-output .pull_request.html_url "$GITHUB_EVENT_PATH") >> $GITHUB_ENV
         echo PR_USER=$(jq --raw-output .pull_request.user.login "$GITHUB_EVENT_PATH") >> $GITHUB_ENV
-        echo X_DIFF = "$(git log -p -1 .github/workflows/main.yml)" >> $GITHUB_ENV
+        echo X_DIFF = "$(git log -p -1 .github/workflows/main.yml)" >> temp
         
     # 打印环境变量
     - name: print env
@@ -36,7 +36,7 @@ jobs:
         type: markdown
         content: |
           # 💯👨‍💻 Success 🎉🎉🎉
-          > ${{ env.X_DIFF }}
+          > ${{ cat temp }}
           > ^_^ from github action message 
     - name: maven build failure
       if: ${{ failure() }}
