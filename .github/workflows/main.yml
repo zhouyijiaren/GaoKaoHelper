@@ -22,8 +22,9 @@ jobs:
         echo "$(jq '.comment.id' $GITHUB_EVENT_PATH)"
         git checkout master
         git pull
-        export COMMENT_ID=$(jq '.after' $GITHUB_EVENT_PATH)
-        git show $(echo $COMMENT_ID|sed 's/\"//g' ) server/pom.xml > temp
+        export AFTER=$(jq '.after' $GITHUB_EVENT_PATH|sed 's/\"//g')
+        export BEFORE=$(jq '.before' $GITHUB_EVENT_PATH|sed 's/\"//g')
+        git show $(echo $AFTER) $(echo $BEFORE) server/pom.xml > temp
         echo 'DIFFLOG<<EOF' >> $GITHUB_ENV
         cat temp >> $GITHUB_ENV
         echo 'EOF' >> $GITHUB_ENV
