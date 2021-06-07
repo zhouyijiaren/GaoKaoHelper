@@ -21,6 +21,7 @@ jobs:
         echo PR_TITLE=$(jq --raw-output .pull_request.title "$GITHUB_EVENT_PATH") >> $GITHUB_ENV
         echo PR_URL=$(jq --raw-output .pull_request.html_url "$GITHUB_EVENT_PATH") >> $GITHUB_ENV
         echo PR_USER=$(jq --raw-output .pull_request.user.login "$GITHUB_EVENT_PATH") >> $GITHUB_ENV
+        echo $GITHUB_EVENT_PATH
         echo "$(jq '.comment.id' $GITHUB_EVENT_PATH)"
         git checkout master
         git pull
