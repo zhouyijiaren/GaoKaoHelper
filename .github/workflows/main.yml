@@ -24,7 +24,9 @@ jobs:
         git pull
         export AFTER=$(jq '.after' $GITHUB_EVENT_PATH|sed 's/\"//g')
         export BEFORE=$(jq '.before' $GITHUB_EVENT_PATH|sed 's/\"//g')
-        git show $(echo $AFTER) $(echo $BEFORE) server/pom.xml > temp
+        echo $AFTER
+        echo $BEFORE
+        git show $AFTER $BEFORE server/pom.xml > temp
         echo 'DIFFLOG<<EOF' >> $GITHUB_ENV
         cat temp >> $GITHUB_ENV
         echo 'EOF' >> $GITHUB_ENV
