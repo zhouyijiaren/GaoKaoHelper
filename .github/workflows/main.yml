@@ -22,7 +22,8 @@ jobs:
         echo "$(jq '.comment.id' $GITHUB_EVENT_PATH)"
         git checkout master
         git pull
-        git show $(jq '.after' $GITHUB_EVENT_PATH) server/pom.xml > temp
+        export COMMENT_ID=$(jq '.after' $GITHUB_EVENT_PATH)
+        git show $(echo COMMENT_ID) server/pom.xml > temp
         echo 'DIFFLOG<<EOF' >> $GITHUB_ENV
         cat temp >> $GITHUB_ENV
         echo 'EOF' >> $GITHUB_ENV
