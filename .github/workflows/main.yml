@@ -28,7 +28,7 @@ jobs:
         echo $BEFORE
         git --version
         git branch
-        git show $AFTER > temp
+        git show $AFTER server/pom.xml > temp
         echo 'DIFFLOG<<EOF' >> $GITHUB_ENV
         cat temp
         echo "grep result:"
