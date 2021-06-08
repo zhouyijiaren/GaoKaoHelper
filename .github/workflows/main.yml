@@ -27,7 +27,7 @@ jobs:
         export BEFORE=$(jq '.before' $GITHUB_EVENT_PATH|sed 's/\"//g')
         echo "after " $AFTER
         echo "before " $BEFORE
-        "git diff $COMPARE -- server/pom.xml > temp"
+        git diff $COMPARE -- server/pom.xml
         echo 'DIFFLOG<<EOF' >> $GITHUB_ENV
         cat temp
         echo "grep result:"
