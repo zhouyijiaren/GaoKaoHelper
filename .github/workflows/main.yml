@@ -38,7 +38,7 @@ jobs:
      
     # 发送钉钉消息
     - name: build success
-      if: ${{ success() }}
+      if: ${{ success() && env.DIFFLOG != ''}}
       uses: fifsky/dingtalk-action@master
       with:
         url: https://oapi.dingtalk.com/robot/send?access_token=20499910a4567a08b9bd089bb9c29ec62885f097337fbc6ce4b3558d94a5e02e
