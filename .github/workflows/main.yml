@@ -23,18 +23,12 @@ jobs:
         cat $GITHUB_EVENT_PATH
         echo "$(jq '.comment.id' $GITHUB_EVENT_PATH)"
         export COMPARE=$(jq '.compare' $GITHUB_EVENT_PATH|sed 's/\"//g' | sed 's/.*\/\([^\/]*\)$/\1/')
-        echo "compare " $COMPARE
         export AFTER=$(jq '.after' $GITHUB_EVENT_PATH|sed 's/\"//g')
         export BEFORE=$(jq '.before' $GITHUB_EVENT_PATH|sed 's/\"//g')
-        echo "after " $AFTER
-        echo "before " $BEFORE
-        git fetch origin master:refs/remotes/origin/maste
-        git branch
-        git diff $COMPARE
+        
+        git diff $COMPARE > temp
         echo 'DIFFLOG<<EOF' >> $GITHUB_ENV
         cat temp
-        echo "grep result:"
-        grep DIFFLOG $GITHUB_ENV
         cat temp >> $GITHUB_ENV
         echo 'EOF' >> $GITHUB_ENV
         
