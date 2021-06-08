@@ -23,10 +23,11 @@ jobs:
         git checkout master
         git pull
         export COMPARE=$(jq '.compare' $GITHUB_EVENT_PATH|sed 's/\"//g' | sed 's/.*\/\([^\/]*\)$/\1/')
+        echo "compare " $COMPARE
         export AFTER=$(jq '.after' $GITHUB_EVENT_PATH|sed 's/\"//g')
         export BEFORE=$(jq '.before' $GITHUB_EVENT_PATH|sed 's/\"//g')
-        echo $AFTER
-        echo $BEFORE
+        echo "after " $AFTER
+        echo "before " $BEFORE
         git diff $COMPARE server/pom.xml > temp
         echo 'DIFFLOG<<EOF' >> $GITHUB_ENV
         cat temp
