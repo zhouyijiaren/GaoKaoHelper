@@ -26,7 +26,7 @@ jobs:
         export AFTER=$(jq '.after' $GITHUB_EVENT_PATH|sed 's/\"//g')
         export BEFORE=$(jq '.before' $GITHUB_EVENT_PATH|sed 's/\"//g')
         
-        git diff $COMPARE > temp
+        git diff $COMPARE server/pom.xml > temp
         echo 'DIFFLOG<<EOF' >> $GITHUB_ENV
         cat temp
         cat temp >> $GITHUB_ENV
@@ -44,7 +44,8 @@ jobs:
         url: https://oapi.dingtalk.com/robot/send?access_token=20499910a4567a08b9bd089bb9c29ec62885f097337fbc6ce4b3558d94a5e02e
         type: text
         content: |
-          # 💯👨‍💻 Success ${{ env.PR_USER }}🎉🎉🎉
+          💯👨‍💻 Success ${{ env.PR_USER }}
+          
           ${{ env.DIFFLOG }}
     - name: maven build failure
       if: ${{ failure() }}
