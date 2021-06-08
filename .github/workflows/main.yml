@@ -26,8 +26,11 @@ jobs:
         export BEFORE=$(jq '.before' $GITHUB_EVENT_PATH|sed 's/\"//g')
         echo $AFTER
         echo $BEFORE
-        git show $AFTER $BEFORE server/pom.xml > temp
+        git show $AFTER server/pom.xml > temp
         echo 'DIFFLOG<<EOF' >> $GITHUB_ENV
+        cat temp
+        echo "grep result:"
+        grep DIFFLOG $GITHUB_ENV
         cat temp >> $GITHUB_ENV
         echo 'EOF' >> $GITHUB_ENV
         
@@ -54,4 +57,4 @@ jobs:
         content: |
           # 💤🤷‍♀️ failure 🙅‍♂️💣
           > Maven Build of fail
-          > (⋟﹏⋞)   from github action message
+          ${{ env.PR_USER }}
