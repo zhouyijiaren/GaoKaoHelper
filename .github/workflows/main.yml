@@ -28,8 +28,6 @@ jobs:
         echo "before " $BEFORE
         git fetch origin master:refs/remotes/origin/maste
         git branch
-        git log > pppp
-        cat pppp
         git diff $COMPARE
         echo 'DIFFLOG<<EOF' >> $GITHUB_ENV
         cat temp
