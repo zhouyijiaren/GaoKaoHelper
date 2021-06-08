@@ -8,7 +8,6 @@
   <modules>
     <module>resty-route</module>
     <module>resty-orm</module>
-           
     <module>resty-log</module>
     <module>resty-common</module>
     <module>resty-cache</module>
