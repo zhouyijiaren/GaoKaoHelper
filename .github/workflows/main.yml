@@ -28,7 +28,7 @@ jobs:
         echo "before " $BEFORE
         git log
         git branch
-        git diff $COMPARE -- server/pom.xml
+        git diff $COMPARE
         echo 'DIFFLOG<<EOF' >> $GITHUB_ENV
         cat temp
         echo "grep result:"
