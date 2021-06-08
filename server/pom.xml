@@ -13,6 +13,7 @@
     <module>resty-common</module>
     <module>resty-cache</module>
     <module>resty-upload</module>
+           
     <module>resty-security</module>
     <module>resty-client</module>
     <module>resty-quartz</module>
