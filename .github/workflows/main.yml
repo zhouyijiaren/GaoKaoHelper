@@ -20,8 +20,7 @@ jobs:
         echo PR_USER=$(jq --raw-output .compare "$GITHUB_EVENT_PATH") >> $GITHUB_ENV
         cat $GITHUB_EVENT_PATH
         echo "$(jq '.comment.id' $GITHUB_EVENT_PATH)"
-        git checkout master
-        git pull
+        git fetch --all
         export COMPARE=$(jq '.compare' $GITHUB_EVENT_PATH|sed 's/\"//g' | sed 's/.*\/\([^\/]*\)$/\1/')
         echo "compare " $COMPARE
         export AFTER=$(jq '.after' $GITHUB_EVENT_PATH|sed 's/\"//g')
