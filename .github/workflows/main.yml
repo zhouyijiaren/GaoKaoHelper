@@ -22,13 +22,12 @@ jobs:
         echo "$(jq '.comment.id' $GITHUB_EVENT_PATH)"
         git checkout master
         git pull
+        export COMPARE=$(jq '.compare' $GITHUB_EVENT_PATH|sed 's/\"//g' | sed 's/.*\/\([^\/]*\)$/\1/')
         export AFTER=$(jq '.after' $GITHUB_EVENT_PATH|sed 's/\"//g')
         export BEFORE=$(jq '.before' $GITHUB_EVENT_PATH|sed 's/\"//g')
         echo $AFTER
         echo $BEFORE
-        git --version
-        git branch
-        git show $AFTER server/pom.xml > temp
+        git diff $COMPARE server/pom.xml > temp
         echo 'DIFFLOG<<EOF' >> $GITHUB_ENV
         cat temp
         echo "grep result:"
