@@ -18,7 +18,7 @@
     <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
     <resty.version>${parent.version}</resty.version>
     <fastjson.version>1.2.5</fastjson.version>
-    <logback.version>1.1.2</logback.version>
+    <logback.version>1.2.0</logback.version>
   </properties>
 
   <dependencies>
