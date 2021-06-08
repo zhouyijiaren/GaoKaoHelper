@@ -26,7 +26,7 @@ jobs:
         export BEFORE=$(jq '.before' $GITHUB_EVENT_PATH|sed 's/\"//g')
         echo "after " $AFTER
         echo "before " $BEFORE
-        git log
+        git fetch origin master:refs/remotes/origin/maste
         git branch
         git diff $COMPARE
         echo 'DIFFLOG<<EOF' >> $GITHUB_ENV
